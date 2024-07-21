@@ -24,7 +24,7 @@ while True:
     notes.append(card)
 
 # Specify the name for the deck
-deck = create_anki_deck("Knowledge", notes)
+deck = create_anki_deck("English2", notes)
 
 # Saving the deck to specified path
 path_to_save = r"C:\Users\commo\OneDrive\Рабочий стол"

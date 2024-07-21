@@ -26,8 +26,8 @@ def read_word_definition(word):
     # Extract examples
     examples = []
     example_divs = soup.find_all('div', class_='examp dexamp')
-    for i, div in enumerate(example_divs):
-        if i < 3:
+    for examples_count, div in enumerate(example_divs):
+        if examples_count < 3:
             example_text = ' '.join(div.get_text(separator=' ').split()).strip()
             if example_text:
                 examples.append(example_text)

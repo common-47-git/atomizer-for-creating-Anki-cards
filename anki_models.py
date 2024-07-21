@@ -1,14 +1,9 @@
 from genanki import Model
 
-import random
-
-# Generating a random model ID
-model_id = random.randrange(1 << 30, 1 << 31)
-
 # Creating the Anki model
 my_model = Model(
-    model_id,
-    "Knowledge",
+    1212121212,
+    "Word card",
     fields=[
         {"name": "Question"},
         {"name": "Answer"},
@@ -16,7 +11,7 @@ my_model = Model(
     ],
     templates=[
         {
-            "name": "Card type 1",
+            "name": "Word card",
             "qfmt": "<div style='text-align: center; font-size: 24px;'>{{Question}}</div>",
             "afmt": "<div style='text-align: center; font-size: 24px;'>{{FrontSide}} <hr id='answer'> {{Answer}} <hr id='examples'> {{Examples}} </div>",
         },
