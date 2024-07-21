@@ -1,7 +1,7 @@
-from bs4 import BeautifulSoup as BS
 import requests
+from bs4 import BeautifulSoup as BS
 
-def get_word_definition(word):
+def read_word_definition(word):
     url = f"https://dictionary.cambridge.org/dictionary/english/{word}"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -15,14 +15,28 @@ def get_word_definition(word):
         return None
 
     soup = BS(response.text, 'lxml')
-    div_content = soup.find('div', class_='def ddef_d db')
 
-    if div_content:
-        definition = div_content.get_text(separator=' ')
-        cleaned_definition = ' '.join(definition.split()).replace(':', '').strip()
-        return cleaned_definition
+    # Extract definition
+    definition_div = soup.find('div', class_='def ddef_d db')
+    if definition_div:
+        definition = ' '.join(definition_div.get_text(separator=' ').split()).replace(':', '').strip()
+    else:
+        definition = None
+
+    # Extract examples
+    examples = []
+    example_divs = soup.find_all('div', class_='examp dexamp')
+    for i, div in enumerate(example_divs):
+        if i < 3:
+            example_text = ' '.join(div.get_text(separator=' ').split()).strip()
+            if example_text:
+                examples.append(example_text)
+        else:
+            break
+
+    if definition or examples:
+        result = {'definition': definition, 'examples': examples}
+        return result
     else:
         return None
 
-word = "hold"   
-print("'", get_word_definition(word), "'")
