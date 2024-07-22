@@ -1,4 +1,5 @@
 from src.app import AnkiAutomizer
 
-app = AnkiAutomizer()
-app.run()
+if __name__ == "__main__":
+    app = AnkiAutomizer()
+    app.run()

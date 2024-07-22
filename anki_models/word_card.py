@@ -1,6 +1,6 @@
 from genanki import Model
 
-word_card_model = Model(
+anki_word_card = Model(
     1212121212,
     "Word card",
     fields=[
