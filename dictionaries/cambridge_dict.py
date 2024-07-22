@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as BS
 
 EXAMPLES_TO_EXTRACT = 3
 
-def read_word_definition(word):
+def read_word_definition(word) -> dict:
     url = f"https://dictionary.cambridge.org/dictionary/english/{word}"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'

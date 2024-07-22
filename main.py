@@ -1,4 +1,4 @@
-from src.app import AutomizerApp
+from src.app import AnkiAutomizer
 
-app = AutomizerApp()
+app = AnkiAutomizer()
 app.run()
