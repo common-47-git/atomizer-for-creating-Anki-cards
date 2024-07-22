@@ -1,7 +1,6 @@
 from genanki import Model
 
-# Creating the Anki model
-my_model = Model(
+word_card_model = Model(
     1212121212,
     "Word card",
     fields=[

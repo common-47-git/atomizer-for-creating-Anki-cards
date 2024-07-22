@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup as BS
 
+EXAMPLES_TO_EXTRACT = 3
+
 def read_word_definition(word):
     url = f"https://dictionary.cambridge.org/dictionary/english/{word}"
     headers = {
@@ -26,17 +28,15 @@ def read_word_definition(word):
     # Extract examples
     examples = []
     example_divs = soup.find_all('div', class_='examp dexamp')
-    for examples_count, div in enumerate(example_divs):
-        if examples_count < 3:
-            example_text = ' '.join(div.get_text(separator=' ').split()).strip()
-            if example_text:
-                examples.append(example_text)
-        else:
+    for EXAMPLES_TO_EXTRACT, div in enumerate(example_divs):
+        if EXAMPLES_TO_EXTRACT > 3:
             break
-
-    if definition or examples:
+        example_text = ' '.join(div.get_text(separator=' ').split()).strip()
+        if example_text:
+            examples.append(example_text)
+        
+    if not definition:
+        return None
+    else:
         result = {'definition': definition, 'examples': examples}
         return result
-    else:
-        return None
-

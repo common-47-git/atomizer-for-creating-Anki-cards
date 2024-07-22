@@ -2,11 +2,11 @@ import genanki
 
 from datetime import date
 
-from anki_models import my_model
+from models.word_card_model import word_card_model
 
 def create_anki_note(word: str, definition: str, examples: str):
     card = genanki.Note(
-        model=my_model,
+        model=word_card_model,
         fields=[word, definition, examples]
     )
     return card
