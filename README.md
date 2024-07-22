@@ -6,4 +6,5 @@ The app is easily modified so you can make your own parser for another dictionar
 The app extract only the first definition of the word, but it only depends on parser though.
 
 I'm considering also adding some Japanese dictionary parser. 
-Python must be installed on your computer to run it.
+Python with all the libs must be installed on your computer to run it.
+The project is made for personal usage so I didn't really care about it.
