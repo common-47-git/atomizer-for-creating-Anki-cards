@@ -10,6 +10,7 @@ from dictionaries import cambridge_dict
 class AnkiAutomizer(BaseModel):
     
     deck_name: str = "English2"
+    path_to_save: str = None
     
     def run(self) -> None:
         notes: list[genanki.Note] = list()
@@ -36,9 +37,7 @@ class AnkiAutomizer(BaseModel):
              
         deck = self.__create_anki_deck(self.deck_name, notes)
                 
-        # Saving the deck to specified path
-        path_to_save = r"C:\Users\Andrew\Desktop"
-        self.__save_deck(path=path_to_save, deck=deck)
+        self.__save_deck(path=self.path_to_save, deck=deck)
     
     
     def __create_anki_note(self, word: str, definition: str, examples: str):
