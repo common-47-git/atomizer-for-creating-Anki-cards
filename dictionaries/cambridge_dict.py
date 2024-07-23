@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup as BS
 
-from schemas.word import WordBase
+from DTOs.word import WordDTO
 
-def read_word_definition(word: WordBase) -> WordBase:
+def read_word_definition(word: WordDTO) -> WordDTO:
     url = f"https://dictionary.cambridge.org/dictionary/english/{word.spelling}"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -13,7 +13,7 @@ def read_word_definition(word: WordBase) -> WordBase:
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an error for bad status codes
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching the URL: {e}")
+        print(f"No access to the dict: {e}")
         return word
 
     soup = BS(response.text, 'lxml')
