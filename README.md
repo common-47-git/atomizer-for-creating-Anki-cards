@@ -7,4 +7,4 @@ The app extract only the first definition of the word, but it only depends on pa
 
 I'm considering also adding some Japanese dictionary parser. 
 Python with all the libs must be installed on your computer to run it.
-The project is made for personal usage so I didn't really care about it.
+The project is made for personal usage so I didn't really care about the aforementioned problem.
