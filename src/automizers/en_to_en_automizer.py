@@ -3,7 +3,7 @@ import genanki
 from datetime import date
 
 from anki_note_types.word_card import word_card_model
-from DTOs.word import WordDTO
+from DTOs.word_card import WordCardDTO
 from dictionaries import cambridge_dict
 from src.automizer import AnkiAutomizer
 
@@ -14,7 +14,7 @@ class EnToEnAutomizer(AnkiAutomizer):
 
         while True:
             
-            word = WordDTO()
+            word = WordCardDTO()
             word.spelling = input("Enter a word or 'exit': ")
             
             if word.spelling == "exit":
@@ -23,13 +23,9 @@ class EnToEnAutomizer(AnkiAutomizer):
             # Getting the word definiton from some source
             word = cambridge_dict.read_word_definition(word=word)
             
-            if not word.definition:
-                print(f"Word '{word.spelling}' not found, make sure you wrote it right.")
-                continue
-            
-            word.examples = word.format_examples() 
-            
-            card = self.__create_anki_note(word=word.spelling, definition=word.definition, examples=word.examples)
+            card = self.__create_anki_note(word=word.spelling, 
+                                           definition=word.definition, 
+                                           examples=word.format_examples())
             notes.append(card)
              
         deck = self.__create_anki_deck(self.deck_name, notes)
@@ -39,30 +35,6 @@ class EnToEnAutomizer(AnkiAutomizer):
         
     def run(self) -> None:
         notes: list[genanki.Note] = list()
-
-        while True:
-            
-            word = WordDTO()
-            word.spelling = input("Enter a word or 'exit': ")
-            
-            if word.spelling == "exit":
-                break 
-
-            # Getting the word definiton from some source
-            word = cambridge_dict.read_word_definition(word=word)
-            
-            if not word.definition:
-                print(f"Word '{word.spelling}' not found, make sure you wrote it right.")
-                continue
-            
-            word.examples = word.format_examples() 
-            
-            card = self.__create_anki_note(word=word.spelling, definition=word.definition, examples=word.examples)
-            notes.append(card)
-             
-        deck = self.__create_anki_deck(self.deck_name, notes)
-                
-        self.__save_deck(path=self.path_to_save, deck=deck)
       
      
     def __create_anki_note(self, word: str, definition: str, examples: str):
@@ -79,7 +51,6 @@ class EnToEnAutomizer(AnkiAutomizer):
             deck.add_note(note)
         return deck
     
-
     def __save_deck(self, path: str, deck: genanki.Deck):
         today = date.today()
         final_file = f"{path}\\anki_question_{today}.apkg"

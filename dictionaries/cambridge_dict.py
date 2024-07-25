@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup as BS
 
-from DTOs.word import WordDTO
+from DTOs.word_card import WordCardDTO
 
-def read_word_definition(word: WordDTO) -> WordDTO:
+def read_word_definition(word: WordCardDTO) -> WordCardDTO:
     url = f"https://dictionary.cambridge.org/dictionary/english/{word.spelling}"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -20,8 +20,12 @@ def read_word_definition(word: WordDTO) -> WordDTO:
 
     # Extract definition
     definition_div = soup.find('div', class_='def ddef_d db')
-    if definition_div:
-        word.definition = ' '.join(definition_div.get_text(separator=' ').split()).replace(':', '').strip()
+    
+    if not definition_div:
+        print(f"Word '{word.spelling}' not found, make sure you wrote it right.")
+        return word
+
+    word.definition = ' '.join(definition_div.get_text(separator=' ').split()).replace(':', '').strip()
 
     # Extract examples
     example_divs = soup.find_all('div', class_='examp dexamp')

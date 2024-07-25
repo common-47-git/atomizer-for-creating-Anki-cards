@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class WordDTO(BaseModel):
+class WordCardDTO(BaseModel):
     spelling: str | None = None
     definition: str | None = None
     examples: list[str] = []
