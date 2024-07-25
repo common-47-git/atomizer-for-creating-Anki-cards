@@ -9,6 +9,34 @@ from src.automizer import AnkiAutomizer
 
 class EnToEnAutomizer(AnkiAutomizer):
     
+    def run_CLI(self) -> None:
+        notes: list[genanki.Note] = list()
+
+        while True:
+            
+            word = WordDTO()
+            word.spelling = input("Enter a word or 'exit': ")
+            
+            if word.spelling == "exit":
+                break 
+
+            # Getting the word definiton from some source
+            word = cambridge_dict.read_word_definition(word=word)
+            
+            if not word.definition:
+                print(f"Word '{word.spelling}' not found, make sure you wrote it right.")
+                continue
+            
+            word.examples = word.format_examples() 
+            
+            card = self.__create_anki_note(word=word.spelling, definition=word.definition, examples=word.examples)
+            notes.append(card)
+             
+        deck = self.__create_anki_deck(self.deck_name, notes)
+                
+        self.__save_deck(path=self.path_to_save, deck=deck)
+    
+        
     def run(self) -> None:
         notes: list[genanki.Note] = list()
 
@@ -35,7 +63,8 @@ class EnToEnAutomizer(AnkiAutomizer):
         deck = self.__create_anki_deck(self.deck_name, notes)
                 
         self.__save_deck(path=self.path_to_save, deck=deck)
-        
+      
+     
     def __create_anki_note(self, word: str, definition: str, examples: str):
         card = genanki.Note(
             model=word_card_model,
