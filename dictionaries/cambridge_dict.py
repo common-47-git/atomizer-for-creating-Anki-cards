@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as BS
 
-from DTOs.word_card import WordCardDTO
+from pydantic_models.word_card import WordCardDTO
 
 def read_word_definition(word: WordCardDTO) -> WordCardDTO:
     url = f"https://dictionary.cambridge.org/dictionary/english/{word.spelling}"

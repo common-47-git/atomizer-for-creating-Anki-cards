@@ -1,15 +1,15 @@
-import genanki
+import genanki 
 
 from datetime import date
 
 from anki_note_types.word_card import word_card_model
-from DTOs.word_card import WordCardDTO
+from pydantic_models.word_card import WordCardDTO
 from dictionaries import cambridge_dict
-from src.automizer import AnkiAutomizer
+from src.automizer_base import AnkiAutomizerBase
 
-class EnToEnAutomizer(AnkiAutomizer):
+class EnToEnCLI(AnkiAutomizerBase):
     
-    def run_CLI(self) -> None:
+    def run(self) -> None:
         notes: list[genanki.Note] = list()
 
         while True:
@@ -32,10 +32,6 @@ class EnToEnAutomizer(AnkiAutomizer):
                 
         self.__save_deck(path=self.path_to_save, deck=deck)
     
-        
-    def run(self) -> None:
-        notes: list[genanki.Note] = list()
-      
      
     def __create_anki_note(self, word: str, definition: str, examples: str):
         card = genanki.Note(
@@ -50,6 +46,7 @@ class EnToEnAutomizer(AnkiAutomizer):
         for note in notes:
             deck.add_note(note)
         return deck
+    
     
     def __save_deck(self, path: str, deck: genanki.Deck):
         today = date.today()
