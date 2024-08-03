@@ -1,9 +1,9 @@
 import genanki 
 
+from pydantic_models.automizer_base import AnkiAutomizerBase
 from pydantic_models.word_card import WordCardDTO
 
 from dictionaries import cambridge_dict
-from src.automizer_base import AnkiAutomizerBase
 from src.automizers.en_to_en import crud
 
 

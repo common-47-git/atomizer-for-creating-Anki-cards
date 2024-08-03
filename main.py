@@ -1,4 +1,4 @@
-from src.automizers.en_to_en.en_to_en_CLI import EnToEnCLI
+#from src.automizers.en_to_en.en_to_en_CLI import EnToEnCLI
 from src.automizers.en_to_en.en_to_en_GUI import EnToEnGUI, app
 
 # python3 -m pip install -r .\requirements.txt
