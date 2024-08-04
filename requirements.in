@@ -2,5 +2,6 @@ genanki
 pydantic
 requests
 bs4
+lxml
 PyQt6
 PySide6

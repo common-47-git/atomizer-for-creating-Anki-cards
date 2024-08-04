@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="mainWindow_icon">
+    <file>mainWindow_icon.svg</file>
+  </qresource>
+</RCC>
