@@ -20,6 +20,6 @@ if __name__ == "__main__":
     #app = EnToEnCLI(path_to_save=r"C:\Users\commo\OneDrive\Рабочий стол")
     #app.run()
 
-    window = EnToEnGUI(path_to_save=r"C:\Users\commo\OneDrive\Рабочий стол")
+    window = EnToEnGUI()
     window.show()
     app.exec()
