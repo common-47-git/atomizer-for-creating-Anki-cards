@@ -9,4 +9,4 @@ Future plans include adding a parser for a Japanese dictionary. Please note that
 
 ---
 
-Feel free to adjust this description as needed!
+Feel free to suggest your parsers or changes!
