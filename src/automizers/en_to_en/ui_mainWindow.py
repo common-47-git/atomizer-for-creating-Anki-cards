@@ -24,8 +24,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(330, 200)
-        icon = QIcon()
-        icon.addFile(u":/mainWindow_icon/mainWindow_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoHome))
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
