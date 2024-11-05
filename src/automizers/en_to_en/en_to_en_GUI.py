@@ -13,12 +13,14 @@ from src.automizers.en_to_en import crud
 from src.automizers.en_to_en.ui_mainWindow import Ui_MainWindow
 
 
+from PyQt6.QtCore import Qt
+
 class EnToEnGUI(QtWidgets.QMainWindow):
     
     notes: list[genanki.Note] = list()
     
     def __init__(self, path_to_save=None, deck_name="AutoDeck"):
-        QMainWindow.__init__(self)
+        super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.add_to_deck_button.clicked.connect(self.on_add_to_deck_clicked)
@@ -28,7 +30,7 @@ class EnToEnGUI(QtWidgets.QMainWindow):
 
         self.deck_name = deck_name
         self.path_to_save = path_to_save
-        
+        self.previous_words = list()
         
     def on_add_to_deck_clicked(self):
         word = WordCardDTO()
@@ -37,9 +39,11 @@ class EnToEnGUI(QtWidgets.QMainWindow):
         if not word.spelling:
             return
         
+        # Save the entered word in previous words list
+        self.previous_words.append(word.spelling)
         self.ui.lineEdit.clear()
         
-        # Getting the word definiton from some source
+        # Getting the word definition from some source
         word = cambridge_dict.read_word_definition(word=word)
         
         if not word.definition:
@@ -47,20 +51,17 @@ class EnToEnGUI(QtWidgets.QMainWindow):
             return
         
         card = crud.create_anki_note(word=word.spelling, 
-                                       definition=word.definition, 
-                                       examples=word.format_examples())
+                                     definition=word.definition, 
+                                     examples=word.format_examples())
         self.notes.append(card)
         
         self.ui.textBrowser.append(word.spelling)
-    
     
     def on_choose_folder_button_clicked(self):
         options = QFileDialog.Options()
         self.path_to_save = QFileDialog.getExistingDirectory(self, "Open directory", "", options=options)
     
-    
     def on_save_deck_clicked(self):
-        
         if not self.path_to_save:
             QMessageBox.information(self, "You did not choose any directory!", "Please choose a directory to save your deck.")
             return
@@ -68,6 +69,12 @@ class EnToEnGUI(QtWidgets.QMainWindow):
         deck = crud.create_anki_deck(self.deck_name, self.notes)
         crud.save_deck(path=self.path_to_save, deck=deck)
         QMessageBox.information(self, "Success", "Anki deck saved successfully!")
-        
+    
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Up:
+            if self.previous_words:
+                self.ui.lineEdit.setText(self.previous_words[-1])
+        else:
+            super().keyPressEvent(event)
 
 app = QApplication([])
