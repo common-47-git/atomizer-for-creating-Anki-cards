@@ -30,7 +30,7 @@ class EnToEnGUI(QtWidgets.QMainWindow):
 
         self.deck_name = deck_name
         self.path_to_save = path_to_save
-        self.previous_words = list()
+        self.previous_word: str
         
     def on_add_to_deck_clicked(self):
         word = WordCardDTO()
@@ -40,7 +40,7 @@ class EnToEnGUI(QtWidgets.QMainWindow):
             return
         
         # Save the entered word in previous words list
-        self.previous_words.append(word.spelling)
+        self.previous_word = word.spelling
         self.ui.lineEdit.clear()
         
         # Getting the word definition from some source
@@ -72,8 +72,8 @@ class EnToEnGUI(QtWidgets.QMainWindow):
     
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Up:
-            if self.previous_words:
-                self.ui.lineEdit.setText(self.previous_words[-1])
+            if self.previous_word:
+                self.ui.lineEdit.setText(self.previous_word)
         else:
             super().keyPressEvent(event)
 
