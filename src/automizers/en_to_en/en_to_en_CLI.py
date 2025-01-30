@@ -22,7 +22,7 @@ class EnToEnCLI(AnkiAutomizerBase):
                 break 
 
             # Getting the word definiton from some source
-            word = cambridge_dict.read_word_definition(word=word)
+            word = cambridge_dict.read_word_definition(words=word)
             
             
             card = crud.create_anki_note(word=word.spelling, 

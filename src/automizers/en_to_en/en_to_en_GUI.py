@@ -31,36 +31,38 @@ class EnToEnGUI(QtWidgets.QMainWindow):
         self.deck_name = deck_name
         self.path_to_save = path_to_save
         self.previous_word: str
+        self.spelling: str
         
     def on_add_to_deck_clicked(self):
-        word = WordCardDTO()
-        word.spelling = self.ui.lineEdit.text()
+        self.spelling = self.ui.lineEdit.text()
         
-        if not word.spelling:
+        if not self.spelling:
             return
-        
-        # Save the entered word in previous words list
-        self.previous_word = word.spelling
+
+        self.previous_word = self.spelling
         self.ui.lineEdit.clear()
         
-        # Getting the word definition from some source
-        word = cambridge_dict.read_word_definition(word=word)
+        # Fetch definitions
+        words = cambridge_dict.read_word_definition(word_spelling=self.spelling)
         
-        if not word.definition:
-            self.ui.textBrowser.append(f"Word '{word.spelling}' not found.")
+        if not words:
+            self.ui.textBrowser.append(f"Word '{self.spelling}' not found.")
             return
-        
-        card = crud.create_anki_note(word=word.spelling, 
-                                     definition=word.definition, 
-                                     examples=word.format_examples())
-        self.notes.append(card)
-        
-        self.ui.textBrowser.append(word.spelling)
+
+        for word in words:
+            card = crud.create_anki_note(word=word.spelling, 
+                                        definition=word.definition, 
+                                        examples=word.format_examples())
+            self.notes.append(card)
+
+            self.ui.textBrowser.append(f"{word.spelling}: {word.definition}")
+    
     
     def on_choose_folder_button_clicked(self):
         options = QFileDialog.Options()
         self.path_to_save = QFileDialog.getExistingDirectory(self, "Open directory", "", options=options)
     
+
     def on_save_deck_clicked(self):
         if not self.path_to_save:
             QMessageBox.information(self, "You did not choose any directory!", "Please choose a directory to save your deck.")
