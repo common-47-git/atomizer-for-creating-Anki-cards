@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
-    <height>200</height>
+    <width>353</width>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,13 +23,13 @@
    </size>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>311</width>
-      <height>181</height>
+      <width>331</width>
+      <height>211</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -37,9 +37,9 @@
       <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="add_to_deck_button">
+      <widget class="QPushButton" name="extract_button">
        <property name="text">
-        <string>Add to deck</string>
+        <string>Extract</string>
        </property>
       </widget>
      </item>
@@ -54,9 +54,9 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QPushButton" name="choose_folder_button">
+      <widget class="QPushButton" name="save_to_button">
        <property name="text">
-        <string>Choose folder</string>
+        <string>Save to</string>
        </property>
       </widget>
      </item>
@@ -64,8 +64,6 @@
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="../../icons/icons_resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

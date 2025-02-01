@@ -3,7 +3,8 @@ from src.automizers.en_to_en.en_to_en_GUI import EnToEnGUI, app
 
 # For developing
 # pyside6-uic .\src\automizers\en_to_en\ui_mainWindow.ui -o ui_mainWindow.py
-# pyside6-rcc .\src\icons\icons_resources.qrc -o icons_resources_rc.py      
+# pyside6-rcc .\src\icons\icons_resources.qrc -o icons_resources_rc.py     
+# pyside6-uic ui_mainWindow.ui -o ui_mainWindow.py 
 
 
 # To install

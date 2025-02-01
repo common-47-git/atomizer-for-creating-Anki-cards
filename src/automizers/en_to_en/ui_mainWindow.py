@@ -22,42 +22,42 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(330, 200)
+        MainWindow.resize(353, 232)
         icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoHome))
         MainWindow.setWindowIcon(icon)
         MainWindow.setIconSize(QSize(12, 12))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 10, 311, 181))
-        self.gridLayout = QGridLayout(self.widget)
+        self.layoutWidget = QWidget(self.centralwidget)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 10, 331, 211))
+        self.gridLayout = QGridLayout(self.layoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit = QLineEdit(self.widget)
+        self.lineEdit = QLineEdit(self.layoutWidget)
         self.lineEdit.setObjectName(u"lineEdit")
 
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
 
-        self.add_to_deck_button = QPushButton(self.widget)
-        self.add_to_deck_button.setObjectName(u"add_to_deck_button")
+        self.extract_button = QPushButton(self.layoutWidget)
+        self.extract_button.setObjectName(u"extract_button")
 
-        self.gridLayout.addWidget(self.add_to_deck_button, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.extract_button, 0, 1, 1, 1)
 
-        self.textBrowser = QTextBrowser(self.widget)
+        self.textBrowser = QTextBrowser(self.layoutWidget)
         self.textBrowser.setObjectName(u"textBrowser")
 
         self.gridLayout.addWidget(self.textBrowser, 1, 0, 1, 2)
 
-        self.save_deck_button = QPushButton(self.widget)
+        self.save_deck_button = QPushButton(self.layoutWidget)
         self.save_deck_button.setObjectName(u"save_deck_button")
 
         self.gridLayout.addWidget(self.save_deck_button, 2, 0, 1, 1)
 
-        self.choose_folder_button = QPushButton(self.widget)
-        self.choose_folder_button.setObjectName(u"choose_folder_button")
+        self.save_to_button = QPushButton(self.layoutWidget)
+        self.save_to_button.setObjectName(u"save_to_button")
 
-        self.gridLayout.addWidget(self.choose_folder_button, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.save_to_button, 2, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -68,8 +68,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"AnkiAutomizer", None))
-        self.add_to_deck_button.setText(QCoreApplication.translate("MainWindow", u"Add to deck", None))
+        self.extract_button.setText(QCoreApplication.translate("MainWindow", u"Extract", None))
         self.save_deck_button.setText(QCoreApplication.translate("MainWindow", u"Save deck", None))
-        self.choose_folder_button.setText(QCoreApplication.translate("MainWindow", u"Choose folder", None))
+        self.save_to_button.setText(QCoreApplication.translate("MainWindow", u"Save to", None))
     # retranslateUi
 
