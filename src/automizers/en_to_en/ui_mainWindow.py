@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(353, 232)
+        MainWindow.setFixedSize(353, 232)
         icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoHome))
         MainWindow.setWindowIcon(icon)
         MainWindow.setIconSize(QSize(12, 12))

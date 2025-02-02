@@ -78,8 +78,8 @@ class DefinitionWindow(QDialog):
 
     def closeEvent(self, event):
         """Override closeEvent to clear definitions before closing and store checked words."""
-        self.save_checked_words()  # Store checked words before closing
-        self.clear_definitions()  # Clear definitions when window is closed
+        self.save_checked_words()
+        self.clear_definitions() 
         for word in self.checked_words:
             print(word)
         for word in self.checked_words:
@@ -87,7 +87,7 @@ class DefinitionWindow(QDialog):
                                         definition=word.definition, 
                                         examples=word.format_examples())
             EnToEnGUI.notes.append(card)
-        event.accept()  # Accept the close event so the window closes
+        event.accept()
 
     def save_checked_words(self):
         """Append checked words and examples to the checked_words list."""
